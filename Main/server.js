@@ -1,9 +1,16 @@
-const path = require('path');
-const express = require('express');
-const helpers = require('./utils/helpers');
+const express = require("express");
+const { engine } = require("express-handlebars");
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-const sequelize = require('./config/config');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+app.engine("handlebars", engine());
+app.set("view engine", "handlebars");
+app.set("views", "./views");
+
+app.get("/", (req, res) => {
+  res.render("home");
+});
+
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
+});

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { record } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// CREATE A BLOG POST
+// CREATE BLOG POST
 router.post('/', withAuth, async (req, res) => {
   try {
     const newrecord = await Record.create({
@@ -16,8 +16,8 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// UPDATE A BLOG POST
-//localhost:3001/api/blog/:id
+// UPDATE BLOG POST
+
 router.put('/:id', async (req, res) => {
   try {
     const updaterecord = await Record.update(
@@ -39,7 +39,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE A BLOG POST
+// DELETE BLOG POST
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const recordData = await Record.destroy({
@@ -50,13 +50,13 @@ router.delete('/:id', withAuth, async (req, res) => {
     });
 
     if (!recordData) {
-      res.status(404).json({ message: 'No blog posts found with this id!' });
+      res.status(404).json({ message: 'No found blog posts with this id!' });
       return;
     }
 
     res.status(200).json(recordData);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: 'No blog info available'});
   }
 });
 
