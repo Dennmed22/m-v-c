@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../configure/config');
-const User = require('./User');
+const Record = require('./Record');
 
-class Record extends Model {}
+class Comment extends Model {}
 
-Record.init(
+Comment.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,11 +12,7 @@ Record.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    content: {
+    text: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -28,7 +24,14 @@ Record.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: User,
+        model: 'user',
+        key: 'id',
+      },
+    },
+    record_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'record',
         key: 'id',
       },
     },
@@ -38,4 +41,4 @@ Record.init(
   }
 );
 
-module.exports = Record;
+module.exports = Comment;
